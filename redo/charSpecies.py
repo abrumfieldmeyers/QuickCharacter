@@ -48,7 +48,11 @@ SpeciesList = {
     'Half-Orc': CharSpecies(
         name='Half-Orc',
         stat_mod={'STR':2, 'CON':1},
-        kill_prof=['Intimidation'],
+        skill_prof=['Intimidation'],
+    ),
+    'Human': CharSpecies(
+        name='Human',
+        stat_mod={'STR':1, 'DEX': 1, 'CON':1, 'INT':1, 'WIS':1, 'CHA':1},
     ),
     
 

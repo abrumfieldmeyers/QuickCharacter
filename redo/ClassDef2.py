@@ -1,15 +1,12 @@
 import random
-import charbackgrounds
 from charClasses import CharClass,ClassList
 from charSpecies import CharSpecies,SpeciesList 
 from charBacks import CharBack,BackList
-from find_checks import fill_save_check, fill_skill_check, check_map
-
-from weaponlist import weaponlist
+from Stats import Stats
 
 class Character:
 
-    def __init__(self, char_name, player_name, char_class, char_back, char_species, random_stats):
+    def __init__(self, player_name, char_name, char_class, char_back, char_species, random_stats):
         '''
         char_name = String
         player_name = String
@@ -21,11 +18,11 @@ class Character:
         self.char_name = char_name
         self.player_name = player_name
         self.char_class = ClassList[char_class]
-        self.char_back = char_back
+        self.char_back = BackList[char_back]
         self.char_species = SpeciesList[char_species]
 
         # Derived from stats
-   
+        self.prof_bonus = 2
         self.set_stats(random_stats)
         self.set_hp()
 
@@ -35,28 +32,40 @@ class Character:
         self.armor_prof = []
         self.set_proficiencies()
         self.armor_class = 10
-
-
-
-
-
-
+    
+    def __repr__(self) -> str:
+        return (f"Name: {self.player_name}\nChar: {self.char_name}\nClass: {self.char_class.title}\nSpecies: {self.char_species.name}\nBack: {self.char_back.title}\nSTATS: \n{self.stats}")
 
     def set_stats(self, random_stats):
         ''' 
         Sets character stats and saving throws
         '''
-        self.stats = {"STR": 0, "DEX": 0, "CON": 0, "INT": 0, "WIS": 0, "CHA": 0}
-        self.saves = {"STR": 0, "DEX": 0, "CON": 0, "INT": 0, "WIS": 0, "CHA": 0}
+        rolls=[]
+
         # Roll for stats if requested
-
+        if (random_stats == True):
+            # roll 4d6, drop lowest for each stat
+            for i in range(6):
+                roll=random.sample(range(1,7),4)
+                roll.remove(min(roll))
+                rolls.append(sum(roll))
         # use recommended stats if not
-
-        # Add heritage bonuses to stats
+        else:
+            rolls = self.char_class.stat_recs
 
         # save stat modifiers
-
+        self.stats = Stats(rolls)
+        
+        # Add species bonuses to stats
+        if self.char_species.stat_mod != {}:
+            for key,val in self.char_species.stat_mod.items():
+                self.stats.update_stat(key,val,False)
+                
         # Update saving throws
+        for stat in self.char_class.saving_throws:
+            self.stats.update_save(stat,self.prof_bonus,False)
+
+
         return
     
     def set_hp(self):

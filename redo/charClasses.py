@@ -25,7 +25,7 @@ ClassList = {
                            ["Thieves' Tools", "Tinker's Tools", "One type of artisan's tools of your choice"],
                            ['Simple Weapons'],
                            ['Light Armor', 'Medium Armor', 'Shields'],
-                           [ 8,12,14,15,13,10],
+                           [8,12,14,15,13,10],
                            ["Dagger", "Light Crossbow"],
                            ["Studded Leather Armor"],
                            {"Thieves tools": 1, "Backpack": 1, "Crowbar": 1, "Hammer": 1, "Pitons": 10, "Torches": 10, "Tinderbox": 1, "Waterskin": 1, "Hemp Rope": 50},
