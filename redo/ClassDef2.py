@@ -53,17 +53,20 @@ class Character:
         else:
             rolls = self.char_class.stat_recs
 
-        # save stat modifiers
         self.stats = Stats(rolls)
-        
+
         # Add species bonuses to stats
         if self.char_species.stat_mod != {}:
             for key,val in self.char_species.stat_mod.items():
                 self.stats.update_stat(key,val,False)
-                
+        print("After update stat")
+        self.stats.printMods()
+
         # Update saving throws
         for stat in self.char_class.saving_throws:
             self.stats.update_save(stat,self.prof_bonus,False)
+        print("After update saves")
+        self.stats.printMods()
 
 
         return
