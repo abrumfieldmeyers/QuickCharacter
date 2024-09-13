@@ -1,10 +1,10 @@
 class CharBack:
-    def __init__(self, title, skill_profs=[], tool_profs=[], weapon_profs=[], armor_profs=[], languages=[], weapons=[], armor=[], equipment={}, feature=[]):
+    def __init__(self, title, skill_prof=[], tool_prof=[], weapon_prof=[], armor_prof=[], languages=[], weapons=[], armor=[], equipment={}, feature=[]):
         self.title = title
-        self.skill_profs = skill_profs
-        self.tool_profs = tool_profs
-        self.weapon_profs = weapon_profs
-        self.armor_profs = armor_profs
+        self.skill_prof = skill_prof
+        self.tool_prof = tool_prof
+        self.weapon_prof = weapon_prof
+        self.armor_prof = armor_prof
         self.weapons = weapons
         self.armor = armor
         self.equipment = equipment
@@ -14,7 +14,7 @@ class CharBack:
 BackList = {
     "Acolyte": CharBack(
         "Acolyte",
-        skill_profs=['Insight', 'Religion'],
+        skill_prof=['Insight', 'Religion'],
         languages=["Any","Any"],
         equipment={
             'Holy symbol': 1,
@@ -38,8 +38,8 @@ BackList = {
 
     "Charlatan": CharBack(
         "Charlatan",
-        skill_profs=['Deception', 'Sleight of Hand'],
-        tool_profs=['Forgery Kit', 'Disguise Kit'],
+        skill_prof=['Deception', 'Sleight of Hand'],
+        tool_prof=['Forgery Kit', 'Disguise Kit'],
         equipment={
             'Fine Clothes': 1,
             'Disguise Kit': 1,
@@ -54,8 +54,8 @@ BackList = {
 
     "Criminal": CharBack(
         "Criminal",
-        skill_profs=['Deception', 'Stealth'],
-        tool_profs=['Thieves Tools', 'One Gaming Set'],
+        skill_prof=['Deception', 'Stealth'],
+        tool_prof=['Thieves Tools', 'One Gaming Set'],
         equipment={
             'Crowbar': 1,
             'Dark Common Clothes with a hood': 1,
@@ -69,8 +69,8 @@ BackList = {
 
     "Entertainer": CharBack(
         "Entertainer",
-        skill_profs=['Acrobatics', 'Performance'],
-        tool_profs=['Disguise Kit', 'One Musical Instrument'],
+        skill_prof=['Acrobatics', 'Performance'],
+        tool_prof=['Disguise Kit', 'One Musical Instrument'],
         equipment={
             'Musical Instrument': 1,
             'Favor of an admirer ': 1,
@@ -87,8 +87,8 @@ BackList = {
 
     "Folk Hero": CharBack(
         "Folk Hero",
-        skill_profs=['Animal Handling', 'Survival'],
-        tool_profs=['Artisans Tools', 'Vehicles (land)'],
+        skill_prof=['Animal Handling', 'Survival'],
+        tool_prof=['Artisans Tools', 'Vehicles (land)'],
         equipment={
             'Artisans Tools': 1,
             'Shovel': 1,
@@ -104,8 +104,8 @@ BackList = {
 
     "Gladiator": CharBack(
         "Gladiator",
-        skill_profs=['Acrobatics', 'Performance'],
-        tool_profs=['Disguise Kit', 'Musical Instrument'],
+        skill_prof=['Acrobatics', 'Performance'],
+        tool_prof=['Disguise Kit', 'Musical Instrument'],
         equipment={
             'Unusual Weapon': 1,
             'Favor of an admirer ': 1,
@@ -124,8 +124,8 @@ BackList = {
 
     "Guild Artisan": CharBack(
         "Guild Artisan",
-        skill_profs=['Insight', 'Persuasion'],
-        tool_profs=['Artisans Tools'],
+        skill_prof=['Insight', 'Persuasion'],
+        tool_prof=['Artisans Tools'],
         languages=["Any"],
         equipment={
             'Artisans Tools': 1,
@@ -147,8 +147,8 @@ BackList = {
 
     "Guild Merchant": CharBack(
         "Guild Merchant",
-        skill_profs=['Insight', 'Persuasion'],
-        tool_profs=['Navigator\'s Tools'],
+        skill_prof=['Insight', 'Persuasion'],
+        tool_prof=['Navigator\'s Tools'],
         languages=["Any"],
         equipment={
             'Mule': 1,
@@ -172,8 +172,8 @@ BackList = {
 
     "Hermit": CharBack(
         "Hermit",
-        skill_profs=['Medicine', 'Religion'],
-        tool_profs=['Herbalism Kit'],
+        skill_prof=['Medicine', 'Religion'],
+        tool_prof=['Herbalism Kit'],
         languages=["Any"],
         equipment={
             'Scroll case stuffed with notes': 1,
@@ -195,8 +195,8 @@ BackList = {
 
     "Knight": CharBack(
         "Knight",
-        skill_profs=['History', 'Persuasion'],
-        tool_profs=['One Gaming Set'],
+        skill_prof=['History', 'Persuasion'],
+        tool_prof=['One Gaming Set'],
         languages=["Any"],
         equipment={
             'Signet Ring': 1,
@@ -212,8 +212,8 @@ BackList = {
 
     "Noble": CharBack(
         "Noble",
-        skill_profs=['History', 'Persuasion'],
-        tool_profs=['One Gaming Set'],
+        skill_prof=['History', 'Persuasion'],
+        tool_prof=['One Gaming Set'],
         languages=["Any"],
         equipment={
             'Signet Ring': 1,
@@ -229,8 +229,8 @@ BackList = {
 
     "Outlander": CharBack(
         "Outlander",
-        skill_profs=['Athletics', 'Survival'],
-        tool_profs=['One Musical Instrument'],
+        skill_prof=['Athletics', 'Survival'],
+        tool_prof=['One Musical Instrument'],
         languages=["Any"],
         equipment={
             'Staff': 1,
@@ -247,7 +247,7 @@ BackList = {
 
     "Sage": CharBack(
         "Sage",
-        skill_profs=['Arcana', 'History'],
+        skill_prof=['Arcana', 'History'],
         languages=["Any","Any"],
         equipment={
             'Bottle of Ink': 1,
@@ -267,8 +267,8 @@ BackList = {
 
     "Sailor": CharBack(
         "Sailor",
-        skill_profs=['Athletics', 'Perception'],
-        tool_profs=['Navigator\'s Tools', 'Vehicles (water)'],
+        skill_prof=['Athletics', 'Perception'],
+        tool_prof=['Navigator\'s Tools', 'Vehicles (water)'],
         equipment={
             'Silk Rope, feet': 50,
             'Lucky Charm': 1,
@@ -286,8 +286,8 @@ BackList = {
 
     "Soldier": CharBack(
         "Soldier",
-        skill_profs=['Athletics', 'Intimidation'],
-        tool_profs=['One Gaming Set', 'Vehicles (land)'],
+        skill_prof=['Athletics', 'Intimidation'],
+        tool_prof=['One Gaming Set', 'Vehicles (land)'],
         equipment={
             'Insignia of Rank': 1,
             'Trophy taken from a fallen enemy': 1,
@@ -305,8 +305,8 @@ BackList = {
 
     "Urchin": CharBack(
         "Urchin",
-        skill_profs=['Stealth', 'Sleight of Hand'],
-        tool_profs=['Disguise Kit', 'Thieves Tools'],
+        skill_prof=['Stealth', 'Sleight of Hand'],
+        tool_prof=['Disguise Kit', 'Thieves Tools'],
         equipment={
             'Map of the city you grew up in': 1,
             'Token to remember your parents by': 1,

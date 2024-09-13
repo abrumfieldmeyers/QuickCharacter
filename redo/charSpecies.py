@@ -1,12 +1,12 @@
 class CharSpecies:
-    def __init__(self,name,skill_prof=[],weapon_prof=[],armor_prof=[],tool_prof=[],stat_mod={},skill_mod=0,features=[]):
+    def __init__(self,name,skill_prof=[],weapon_prof=[],armor_prof=[],tool_prof=[],stat_mod={},skill_count=0,features=[]):
         self.name = name
         self.skill_prof = skill_prof
         self.weapon_prof = weapon_prof
         self.armor_prof = armor_prof
         self.tool_prof = tool_prof
         self.stat_mod = stat_mod
-        self.skill_mod = skill_mod
+        self.skill_count = skill_count
         self.features = features
 
 
@@ -43,7 +43,7 @@ SpeciesList = {
     'Half-Elf': CharSpecies(
         name='Half-Elf',
         stat_mod={'CHA':2, 'WIS':1, 'INT':1},
-        skill_mod=2,
+        skill_count=2,
     ),
     'Half-Orc': CharSpecies(
         name='Half-Orc',

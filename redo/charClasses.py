@@ -1,15 +1,15 @@
 
 class CharClass:
-    def __init__(self, title, hit_die, saving_throws, skill_count, skill_profs, tool_profs,
-                 weapon_profs, armor_profs, stat_recs, weapons, armor, equipment, features):
+    def __init__(self, title, hit_die, saving_throws, skill_count, skill_prof, tool_prof,
+                 weapon_prof, armor_prof, stat_recs, weapons, armor, equipment, features):
         self.title = title
         self.hit_die = hit_die
         self.saving_throws = saving_throws
         self.skill_count = skill_count
-        self.skill_profs = skill_profs
-        self.tool_profs = tool_profs
-        self.weapon_profs = weapon_profs
-        self.armor_profs = armor_profs
+        self.skill_prof = skill_prof
+        self.tool_prof = tool_prof
+        self.weapon_prof = weapon_prof
+        self.armor_prof = armor_prof
         self.stat_recs = stat_recs
         self.weapons = weapons
         self.armor = armor

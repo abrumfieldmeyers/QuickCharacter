@@ -31,7 +31,7 @@ class Stats():
         self.WISSave = self.WISMod
         self.CHAMod = self.stat_to_mod(self.CHA) 
         self.CHASave = self.CHAMod
-        self.printMods()
+
 
     def stat_to_mod(self,stat):
         # Helper function to get mod value from base stat
@@ -44,7 +44,7 @@ class Stats():
             setattr(self,stat_str,val)
         else:
             setattr(self,stat_str,str(val + stat_to_change))
-            
+
         # update associated stat mod
         setattr(self,stat_str+"Mod",self.stat_to_mod(int(getattr(self,stat_str))))
         return
@@ -58,15 +58,6 @@ class Stats():
         else:
             setattr(self,stat_str+"Save",str(stat_mod+val))
 
-        
-
-        # make sure we're updating the saving throw, not the main stat
-        # statSave = getattr(self,stat_str + "Save")
-
-        # if (replace == True):
-        #     setattr(self,statSave,val)s
-        # else:
-        #     setattr(self,stat_str+"Save",str(val + statMod))
         return
 
     def printMods(self):

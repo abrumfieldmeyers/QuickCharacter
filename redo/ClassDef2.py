@@ -73,7 +73,7 @@ class Character:
         # Set baseline HP from CON mod + class
         self.max_hp = self.char_class.hit_die + self.stats.CONMod
         # Check species hp bonuses
-        
+
         # Check class hp bonuses
 
         return
@@ -82,14 +82,53 @@ class Character:
         '''
         Sets character proficiencies: skills, tools, armor, weapons
         '''
-        # Add all proficiencies from classes[self.char_class]
-        # 
-        # Add all proficiencies from species[self.char_species]
-        # 
-        # Add all proficiencies from backgrounds[self.char_background] 
+        skills_to_pick = 0
+        sources = [self.char_back,self.char_species,self.char_class]
+        # Add weapon, armor, and tool prof from background, species, and class
+        # Add skill proficiencies from only background and species. 
+        # Class skill proficiencies are added later
+        for source in sources:
+            for p in source.armor_prof:
+                self.armor_prof.append(p)
+            for p in source.weapon_prof:
+                self.weapon_prof.append(p)
+            for p in source.tool_prof:
+                self.tool_prof.append(p)
+            if source != self.char_class:
+                for p in source.skill_prof:
+                    self.skill_prof.append(p)
 
-        # Sort profs for readability
-
-        # Update count for class skills not yet selected
+        skills_to_pick += self.char_species.skill_count
+        skills_to_pick += self.char_class.skill_count   
+        available_skills = [skill for skill in self.char_class.skill_prof if skill not in self.skill_prof]
+        
+        # Select Class Skills
+        # TODO We will use text prompt here, but need to find a dif way to handle this for other projects
+        while skills_to_pick >0:
+            for i in range(len(available_skills)):
+                print(f"{i+1}: {available_skills[i]}")
+            pick = input("Select a skill: ")
+            if pick== '' or int(pick)<1 or int(pick)> len(available_skills):   # TODO string protection
+                continue
+            self.skill_prof.append(available_skills[int(pick)-1])
+            available_skills.remove(available_skills[int(pick)-1])
+            skills_to_pick -= 1
+        self.skill_prof.sort()
+        # self.printProfs()
         return
     
+    def printProfs(self):
+        # Print all proficiencies 
+        print("\nWeapon Profs:")
+        for p in self.weapon_prof:
+            print(p)
+        print("\nArmor Profs:")
+        for p in self.armor_prof:
+            print(p)
+        print("\nTool Profs:")
+        for p in self.tool_prof:
+            print(p)
+        print("\nSkill Profs:")
+        for p in self.skill_prof:
+            print(p)
+        print("-----------------")
