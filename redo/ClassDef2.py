@@ -59,15 +59,10 @@ class Character:
         if self.char_species.stat_mod != {}:
             for key,val in self.char_species.stat_mod.items():
                 self.stats.update_stat(key,val,False)
-        print("After update stat")
-        self.stats.printMods()
 
         # Update saving throws
         for stat in self.char_class.saving_throws:
             self.stats.update_save(stat,self.prof_bonus,False)
-        print("After update saves")
-        self.stats.printMods()
-
 
         return
     
@@ -75,10 +70,10 @@ class Character:
         '''
         Sets character HP
         '''
-        # Set baselin HP from CON mod + class
-        self.max_hp = 10
+        # Set baseline HP from CON mod + class
+        self.max_hp = self.char_class.hit_die + self.stats.CONMod
         # Check species hp bonuses
-
+        
         # Check class hp bonuses
 
         return
