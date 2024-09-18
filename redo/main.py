@@ -9,4 +9,4 @@ if __name__ == "__main__":
     rdm = input('random stats: ') or False    
     print("--------------------------------------------------")
     char = Character(p_name,c_name,cls,bck,spec,rdm)
-    # print(char)
+    print(char)

@@ -43,7 +43,7 @@ class Character:
         rolls=[]
 
         # Roll for stats if requested
-        if (random_stats == True):
+        if (random_stats == "True"):
             # roll 4d6, drop lowest for each stat
             for i in range(6):
                 roll=random.sample(range(1,7),4)
