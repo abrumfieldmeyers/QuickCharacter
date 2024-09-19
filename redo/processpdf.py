@@ -23,12 +23,12 @@ def process(character):
         writer.pages[0], {
                         # General Attributes
                         "PlayerName": character.player_name, 
-                        "ClassLevel": character.charclass + " 1", 
+                        "ClassLevel": str(character.charclass) + " 1", 
                         "CharacterName": character.char_name,
-                        "Background": character.background,
-                        "Race " : character.heritage,
+                        "Background": character.char_back,
+                        "Race " : character.char_species,
                         "HPMax": character.max_hp,
-                        "HPCurrent": character.max_hp,
+                        "HPCurrent": character.current_hp,
                         "Speed": character.speed,
                         "Initiative": int(character.stats["DEXmod"]),
                         "ProfBonus": character.ProfBonus,

@@ -76,6 +76,7 @@ class Character:
 
         # Check class hp bonuses
 
+        self.current_hp = self.max_hp
         return
     
     def set_proficiencies(self):
