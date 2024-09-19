@@ -60,19 +60,25 @@ def process(character):
     )
 
     # Process all proficiency scores
-    # for i in range(len(skill_list)):
-    #     for skill in skill_list[i]:
-    #         if skill in character.skill_proficiencies:
-    #             writer.update_page_form_field_values(
-    #                 writer.pages[0], {skill: character.stats[statlist[i]+'mod'] + 2}
-    #             )
-    #         else:
-    #             writer.update_page_form_field_values(
-    #                 writer.pages[0], {skill: character.stats[statlist[i]+'mod']}
-    #             )
-    # # Process checkboxes for skills
-    # for num in character.skill_checkboxes:
-    #     writer.update_page_form_field_values(writer.pages[0], {f"Check Box {num}":"/Yes"})
+    for i in range(len(skill_list)):
+        stat_mod = getattr(character.stats,statlist[i]+"Mod")   # stat mod for these skills
+        for skill in skill_list[i]:
+            if skill == "Animal":   # Weird matching issue with PDF fields
+                to_check = "Animal Handling"
+            else:
+                to_check = skill
+            if to_check in character.skill_prof:
+                print("!! ",to_check)
+                writer.update_page_form_field_values(
+                    writer.pages[0], {skill: stat_mod + 2}
+                )
+            else:
+                writer.update_page_form_field_values(
+                    writer.pages[0], {skill: stat_mod}
+                )
+    # Process checkboxes for skills
+    for num in character.skill_checks:
+        writer.update_page_form_field_values(writer.pages[0], {f"Check Box {num}":"/Yes"})
 
     # # Process checkboxes for stat saves
     # for num in character.save_checkboxes:

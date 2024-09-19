@@ -2,6 +2,7 @@ import random
 from charClasses import CharClass,ClassList
 from charSpecies import CharSpecies,SpeciesList 
 from charBacks import CharBack,BackList
+from find_checks import fill_skill_check
 from Stats import Stats
 
 class Character:
@@ -25,13 +26,16 @@ class Character:
         # Derived from stats
         self.prof_bonus = 2
         self.set_stats(random_stats)
+        self.save_checks = []
         self.set_hp()
 
         self.skill_prof = []
         self.tool_prof = []
         self.weapon_prof = []
         self.armor_prof = []
+        self.skill_checks= []
         self.set_proficiencies()
+        print("SKILLS in INIT : ",self.skill_prof)
         self.armor_class = 10
     
     def __repr__(self) -> str:
@@ -99,6 +103,8 @@ class Character:
             if source != self.char_class:
                 for p in source.skill_prof:
                     self.skill_prof.append(p)
+                    fill_skill_check(p,self.skill_checks)
+
 
         skills_to_pick += self.char_species.skill_count
         skills_to_pick += self.char_class.skill_count   
@@ -113,9 +119,15 @@ class Character:
             if pick== '' or int(pick)<1 or int(pick)> len(available_skills):   # TODO string protection
                 continue
             self.skill_prof.append(available_skills[int(pick)-1])
+            fill_skill_check(available_skills[int(pick)-1],self.skill_checks)
             available_skills.remove(available_skills[int(pick)-1])
             skills_to_pick -= 1
+
+            
         self.skill_prof.sort()
+        self.weapon_prof.sort()
+        self.armor_prof.sort()
+        self.tool_prof.sort()
         # self.printProfs()
         return
     
