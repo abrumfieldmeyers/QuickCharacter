@@ -1,4 +1,6 @@
 from ClassDef2 import Character
+from processpdf import process
+
 
 if __name__ == "__main__":
     p_name = input("Player Name: \n") or "Player A"
@@ -10,3 +12,4 @@ if __name__ == "__main__":
     print("--------------------------------------------------")
     char = Character(p_name,c_name,cls,bck,spec,rdm)
     print(char)
+    process(char)

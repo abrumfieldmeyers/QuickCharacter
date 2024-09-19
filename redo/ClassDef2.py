@@ -20,6 +20,7 @@ class Character:
         self.char_class = ClassList[char_class]
         self.char_back = BackList[char_back]
         self.char_species = SpeciesList[char_species]
+        self.speed = self.char_species.speed
 
         # Derived from stats
         self.prof_bonus = 2
@@ -34,7 +35,7 @@ class Character:
         self.armor_class = 10
     
     def __repr__(self) -> str:
-        return (f"Name: {self.player_name}\nChar: {self.char_name}\nClass: {self.char_class.title}\nSpecies: {self.char_species.name}\nBack: {self.char_back.title}\nSTATS: \n{self.stats}")
+        return (f"Name: {self.player_name}\nChar: {self.char_name}\nClass: {self.char_class.name}\nSpecies: {self.char_species.name}\nBack: {self.char_back.name}\nSTATS: \n{self.stats}")
 
     def set_stats(self, random_stats):
         ''' 

@@ -1,6 +1,6 @@
 class CharBack:
-    def __init__(self, title, skill_prof=[], tool_prof=[], weapon_prof=[], armor_prof=[], languages=[], weapons=[], armor=[], equipment={}, feature=[]):
-        self.title = title
+    def __init__(self, name, skill_prof=[], tool_prof=[], weapon_prof=[], armor_prof=[], languages=[], weapons=[], armor=[], equipment={}, feature=[]):
+        self.name = name
         self.skill_prof = skill_prof
         self.tool_prof = tool_prof
         self.weapon_prof = weapon_prof
