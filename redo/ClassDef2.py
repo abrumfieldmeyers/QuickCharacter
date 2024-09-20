@@ -2,7 +2,7 @@ import random
 from charClasses import CharClass,ClassList
 from charSpecies import CharSpecies,SpeciesList 
 from charBacks import CharBack,BackList
-from find_checks import fill_skill_check
+from find_checks import fill_skill_check,fill_save_check
 from Stats import Stats
 
 class Character:
@@ -25,8 +25,8 @@ class Character:
 
         # Derived from stats
         self.prof_bonus = 2
-        self.set_stats(random_stats)
         self.save_checks = []
+        self.set_stats(random_stats)
         self.set_hp()
 
         self.skill_prof = []
@@ -35,7 +35,6 @@ class Character:
         self.armor_prof = []
         self.skill_checks= []
         self.set_proficiencies()
-        print("SKILLS in INIT : ",self.skill_prof)
         self.armor_class = 10
     
     def __repr__(self) -> str:
@@ -64,11 +63,12 @@ class Character:
         if self.char_species.stat_mod != {}:
             for key,val in self.char_species.stat_mod.items():
                 self.stats.update_stat(key,val,False)
-
+        
         # Update saving throws
         for stat in self.char_class.saving_throws:
             self.stats.update_save(stat,self.prof_bonus,False)
-
+            fill_save_check(stat,self.save_checks)
+        
         return
     
     def set_hp(self):
@@ -76,7 +76,7 @@ class Character:
         Sets character HP
         '''
         # Set baseline HP from CON mod + class
-        self.max_hp = self.char_class.hit_die + self.stats.CONMod
+        self.max_hp = self.char_class.hit_die + self.stats.CON.mod
         # Check species hp bonuses
 
         # Check class hp bonuses
@@ -128,7 +128,7 @@ class Character:
         self.weapon_prof.sort()
         self.armor_prof.sort()
         self.tool_prof.sort()
-        # self.printProfs()
+        self.printProfs()
         return
     
     def printProfs(self):
@@ -144,5 +144,5 @@ class Character:
             print(p)
         print("\nSkill Profs:")
         for p in self.skill_prof:
-            print(p)
+            print(p,",")
         print("-----------------")

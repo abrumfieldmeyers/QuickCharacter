@@ -30,28 +30,28 @@ def process(character):
                         "HPMax": character.max_hp,
                         "HPCurrent": character.current_hp,
                         "Speed": character.speed,
-                        "Initiative": character.stats.DEXMod,
+                        "Initiative": character.stats.DEX.mod,
                         "ProfBonus": character.prof_bonus,
 
                         # Character Stats & Saves
-                        "STR": character.stats.STR,
-                        "STRmod": int(character.stats.STRMod),
-                        "ST Strength": int(character.stats.STRSave),
-                        "DEX": int(character.stats.DEX),
-                        "DEXmod ": int(character.stats.DEXMod),
-                        "ST Dexterity": int(character.stats.DEXSave),
-                        "CON": int(character.stats.CON),
-                        "CONmod": int(character.stats.CONMod) ,
-                        "ST Constitution": int(character.stats.CONSave),
-                        "INT": int(character.stats.INT),
-                        "INTmod": int(character.stats.INTMod) ,
-                        "ST Intelligence": int(character.stats.INTSave),
-                        "WIS": int(character.stats.WIS),
-                        "WISmod": int(character.stats.WISMod) ,
-                        "ST Wisdom": int(character.stats.WISSave),
-                        "CHA": int(character.stats.CHA),
-                        "CHamod": int(character.stats.CHAMod) ,
-                        "ST Charisma": int(character.stats.CHASave),
+                        "STR": character.stats.STR.value,
+                        "STRmod": character.stats.STR.mod,
+                        "ST Strength": character.stats.STR.save_mod,
+                        "DEX": character.stats.DEX.value,
+                        "DEXmod ": character.stats.DEX.mod,
+                        "ST Dexterity": character.stats.DEX.save_mod,
+                        "CON": character.stats.CON.value,
+                        "CONmod": character.stats.CON.mod ,
+                        "ST Constitution": character.stats.CON.save_mod,
+                        "INT": character.stats.INT.value,
+                        "INTmod": character.stats.INT.mod ,
+                        "ST Intelligence": character.stats.INT.save_mod,
+                        "WIS": character.stats.WIS.value,
+                        "WISmod": character.stats.WIS.mod,
+                        "ST Wisdom": character.stats.WIS.save_mod,
+                        "CHA": character.stats.CHA.value,
+                        "CHamod": character.stats.CHA.mod,
+                        "ST Charisma": character.stats.CHA.save_mod,
 
                         # Armor Class
                         "AC" : int(character.armor_class)
@@ -61,28 +61,29 @@ def process(character):
 
     # Process all proficiency scores
     for i in range(len(skill_list)):
-        stat_mod = getattr(character.stats,statlist[i]+"Mod")   # stat mod for these skills
+        assoc_stat = getattr(character.stats,statlist[i])   # stat mod for these skills
         for skill in skill_list[i]:
             if skill == "Animal":   # Weird matching issue with PDF fields
                 to_check = "Animal Handling"
             else:
                 to_check = skill
             if to_check in character.skill_prof:
-                print("!! ",to_check)
                 writer.update_page_form_field_values(
-                    writer.pages[0], {skill: stat_mod + 2}
+                    writer.pages[0], {skill: assoc_stat.mod + 2}
                 )
             else:
                 writer.update_page_form_field_values(
-                    writer.pages[0], {skill: stat_mod}
+                    writer.pages[0], {skill: assoc_stat.mod}
                 )
     # Process checkboxes for skills
     for num in character.skill_checks:
         writer.update_page_form_field_values(writer.pages[0], {f"Check Box {num}":"/Yes"})
 
-    # # Process checkboxes for stat saves
-    # for num in character.save_checkboxes:
-    #     writer.update_page_form_field_values(writer.pages[0], {f"Check Box {num}":"/Yes"})
+    # Process checkboxes for stat saves
+    print("Saves:")
+    print(character.save_checks)
+    for num in character.save_checks:
+        writer.update_page_form_field_values(writer.pages[0], {f"Check Box {num}":"/Yes"})
 
     # # Process equipment
     # equipmentlist = ""
