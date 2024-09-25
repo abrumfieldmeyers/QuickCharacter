@@ -60,6 +60,8 @@ def process(character):
                         "HDTotal" : "1d"+str(character.char_class.hit_die),
                         "HD" : "1",
 
+                        "Passive": 10 + int(character.skill_list.Perception.value)
+
 
                         }
                     
@@ -69,19 +71,13 @@ def process(character):
     for s in vars(character.skill_list):
         if s == "proficient_skills" or s == "expertise_skills":
             continue
-        print(s)
         # Check box for proficient/expertise skills
-        
         skl = getattr(character.skill_list,s)
-
         if skl.prof == True or skl.exp == True:
             num = get_skill_check(s)
-            print("Skill: ",skl)
-            print("num: ",num)
             writer.update_page_form_field_values(writer.pages[0], {f"Check Box {num}":"/Yes"})
         
-        print(skl)
-        # Minor processing to account for weirdly named PDF fields 
+        # Minor processing to account for weirdly named PDF fields
         if s == "AnimalHandling":
             s = "Animal"
         elif s == "Deception":
@@ -99,14 +95,8 @@ def process(character):
         writer.update_page_form_field_values(
             writer.pages[0], {s: skl.value}
         )
-       
-    # # Process checkboxes for skills
-    # for num in character.skill_checks:
-    #     writer.update_page_form_field_values(writer.pages[0], {f"Check Box {num}":"/Yes"})
-
+    
     # Process checkboxes for stat saves
-    print("Saves:")
-    print(character.save_checks)
     for num in character.save_checks:
         writer.update_page_form_field_values(writer.pages[0], {f"Check Box {num}":"/Yes"})
 

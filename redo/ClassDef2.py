@@ -127,7 +127,7 @@ class Character:
         self.weapon_prof.sort()
         self.armor_prof.sort()
         self.tool_prof.sort()
-        self.printProfs()
+        # self.printProfs()
         return
     
     def printProfs(self):
