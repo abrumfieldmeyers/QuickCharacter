@@ -13,4 +13,4 @@ if __name__ == "__main__":
     char = Character(p_name,c_name,cls,bck,spec,rdm)
     print(char)
     char.stats.printMods()
-    # process(char)
+    process(char)

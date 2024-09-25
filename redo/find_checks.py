@@ -36,6 +36,7 @@ check_map = {
     "CHA":22,
     "Acrobatics":23,
     "Animal Handling":24,
+    "AnimalHandling":24,
     "Arcana":25,
     "Athletics":26,
     "Deception":27,
@@ -52,6 +53,8 @@ check_map = {
     "Persuasion":36,
     "Religion": 37,
     "Sleight of Hand": 38,
+    "SleightofHand": 38,
+    "SleightOfHand": 38,
     "Stealth":39,
     "Stealth ":39,
     "Survival":40
@@ -63,6 +66,10 @@ def fill_save_check(stat, lst):
 def fill_skill_check(skill, lst):
     lst.append(check_map[skill])
 
+def get_skill_check(skill):
+    if skill in check_map:
+        return check_map[skill]
+    return None
 
 # for i in range (11,41):
 #     reader = PdfReader("5E_CharacterSheet_Fillable.pdf")

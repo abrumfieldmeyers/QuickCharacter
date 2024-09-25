@@ -4,6 +4,7 @@ from charSpecies import CharSpecies,SpeciesList
 from charBacks import CharBack,BackList
 from find_checks import fill_skill_check,fill_save_check
 from Stats import Stats
+from SkillList import SkillList
 
 class Character:
 
@@ -33,8 +34,8 @@ class Character:
         self.tool_prof = []
         self.weapon_prof = []
         self.armor_prof = []
-        self.skill_checks= []
         self.set_proficiencies()
+        self.skill_list = SkillList(self.stats,self.skill_prof)
         self.armor_class = 10
     
     def __repr__(self) -> str:
@@ -103,7 +104,6 @@ class Character:
             if source != self.char_class:
                 for p in source.skill_prof:
                     self.skill_prof.append(p)
-                    fill_skill_check(p,self.skill_checks)
 
 
         skills_to_pick += self.char_species.skill_count
@@ -119,7 +119,6 @@ class Character:
             if pick== '' or int(pick)<1 or int(pick)> len(available_skills):   # TODO string protection
                 continue
             self.skill_prof.append(available_skills[int(pick)-1])
-            fill_skill_check(available_skills[int(pick)-1],self.skill_checks)
             available_skills.remove(available_skills[int(pick)-1])
             skills_to_pick -= 1
 

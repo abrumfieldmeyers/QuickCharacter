@@ -1,4 +1,5 @@
 from PyPDF2 import PdfReader, PdfWriter
+from find_checks import get_skill_check
 # from weaponlist import weaponlist
 
 skill_list_STR = ['Athletics' ]
@@ -54,30 +55,54 @@ def process(character):
                         "ST Charisma": character.stats.CHA.save_mod,
 
                         # Armor Class
-                        "AC" : int(character.armor_class)
+                        "AC" : int(character.armor_class),
+                        # Hit Die
+                        "HDTotal" : "1d"+str(character.char_class.hit_die),
+                        "HD" : "1",
+
+
                         }
                     
     )
 
     # Process all proficiency scores
-    for i in range(len(skill_list)):
-        assoc_stat = getattr(character.stats,statlist[i])   # stat mod for these skills
-        for skill in skill_list[i]:
-            if skill == "Animal":   # Weird matching issue with PDF fields
-                to_check = "Animal Handling"
-            else:
-                to_check = skill
-            if to_check in character.skill_prof:
-                writer.update_page_form_field_values(
-                    writer.pages[0], {skill: assoc_stat.mod + 2}
-                )
-            else:
-                writer.update_page_form_field_values(
-                    writer.pages[0], {skill: assoc_stat.mod}
-                )
-    # Process checkboxes for skills
-    for num in character.skill_checks:
-        writer.update_page_form_field_values(writer.pages[0], {f"Check Box {num}":"/Yes"})
+    for s in vars(character.skill_list):
+        if s == "proficient_skills" or s == "expertise_skills":
+            continue
+        print(s)
+        # Check box for proficient/expertise skills
+        
+        skl = getattr(character.skill_list,s)
+
+        if skl.prof == True or skl.exp == True:
+            num = get_skill_check(s)
+            print("Skill: ",skl)
+            print("num: ",num)
+            writer.update_page_form_field_values(writer.pages[0], {f"Check Box {num}":"/Yes"})
+        
+        print(skl)
+        # Minor processing to account for weirdly named PDF fields 
+        if s == "AnimalHandling":
+            s = "Animal"
+        elif s == "Deception":
+            s = "Deception "
+        elif s == "History":
+            s = "History "
+        elif s == "Investigation":
+            s = "Investigation "
+        elif s == "Perception":
+            s = "Perception "
+        elif s == "SleightOfHand":
+            s = "SleightofHand"
+        elif s == "Stealth":
+            s = "Stealth "
+        writer.update_page_form_field_values(
+            writer.pages[0], {s: skl.value}
+        )
+       
+    # # Process checkboxes for skills
+    # for num in character.skill_checks:
+    #     writer.update_page_form_field_values(writer.pages[0], {f"Check Box {num}":"/Yes"})
 
     # Process checkboxes for stat saves
     print("Saves:")
