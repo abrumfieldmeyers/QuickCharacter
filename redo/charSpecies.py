@@ -1,4 +1,5 @@
 from Feature import Features
+# from ClassDef2 import Character
 
 class CharSpecies:
     def __init__(self,name,speed=30,size="Medium",languages=[],skill_prof=[],weapon_prof=[],armor_prof=[],tool_prof=[],stat_mod={},skill_count=0,features=[]):
@@ -13,6 +14,20 @@ class CharSpecies:
         self.size = size
         self.speed = speed
         self.languages = languages
+
+# Callback funcs 
+def tiefling_add_spell(character):  # TODO add Thaumaturgy cantrip
+    pass
+def halfelf_fleet_of_foot(character):
+    character.speed = 35
+def gnome_add_spell(character): # TODO add Minor Illusion cantrip
+    pass
+def dwarf_increase_hp(character): 
+    character.current_hp += 1 
+    character.max_hp += 1
+def dragonborn_breath_weapon(character):    # TODO add breath weapon. default to fire damage
+    pass
+
 
 SpeciesList = {
     'xx': CharSpecies(
@@ -33,7 +48,7 @@ SpeciesList = {
             Features("Draconic Ancestry: Gold",
                      "You can use your action to exhale destructive energy. It deals fire damage in a 15 foot cone. When you use your breath weapon, all creatures in the area must make a CON saving throw. The DC of this saving throw is 8 + your Constitution modifier + your proficiency bonus. A creature takes 2d6 fire damage on a failed save, and half as much damage on a successful one. The damage increase to 3d6 at 6th level, 4d6 at 11th, and 5d6 at 16th level. After using your breath weapon, you cannot use it again until you complete a short or long rest.",
                      "species",
-                     [] # TODO - add fire breath weapon
+                     [dragonborn_breath_weapon] # TODO - add fire breath weapon
                      ),
             Features("Damage Resistance",
                      'You have resistance to the damage type associated with your ancestry (fire).',
@@ -61,7 +76,7 @@ SpeciesList = {
             Features("Dwarven Toughness",
                      "Your hit point maximum increases by 1, and it increases by 1 every time you gain a level.",
                      "species",
-                     [] # TODO - increase HP by 1
+                     [dwarf_increase_hp]
                      ),
         ]
     ),
@@ -105,7 +120,7 @@ SpeciesList = {
             Features("Natural Illusionist",
                      "You know the Minor Illusion cantrip. Intelligence is your spellcasting modifier for it",
                      "species",
-                     [] # TODO add Minor Illusion cantrip
+                     [gnome_add_spell] 
                      )
         ]
     ),
@@ -122,7 +137,7 @@ SpeciesList = {
             Features("Fleet of Foot",
                      "Your base walking speed increases to 35 feet",
                      "species",
-                     [] # TODO ensure that base speed = 35. Hard coded above, but we should double check
+                     [halfelf_fleet_of_foot] # TODO ensure that base speed = 35. Hard coded above, but we should double check
             ),
             Features("Fey Ancestry",
                      "You have advantage on saving throws against being charmed, and magic can't put you to sleep.",
@@ -185,7 +200,8 @@ SpeciesList = {
             Features("Infernal Legacy",
                      "You know the Thaumaturgy cantrip. Once you reach 3rd level, you can cast the Hellish Rebuke spell once as a 2nd-level spell. Once you reach 5th level, you can also cast the Darkness spell once. You must finish a long rest to cast these spells again with this trait. Charisma is your spellcasting ability for these spells.",
                      "species",
-                     []) # TODO - add Thaumaturgy cantrip to spells
+                     [tiefling_add_spell]) 
         ]
     ),
 }
+

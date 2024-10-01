@@ -17,6 +17,32 @@ class CharClass:
         self.equipment = equipment
         self.features = features
 
+# Class Feature callbacks
+def barbarian_update_AC(character):  
+    newAC = character.stats.DEX.mod + character.stats.CON.mod + 10
+    if newAC > character.armor_class:
+        character.armor_class = newAC
+
+def druid_language(character): # TODO add new language
+    pass 
+
+def monk_update_AC(character):  
+    newAC = character.stats.DEX.mod + character.stats.WIS.mod + 10
+    if newAC > character.armor_class:
+        character.armor_class = newAC
+
+def monk_add_weapon(character): # TODO add unarmed strike weapon
+    pass
+
+def rogue_language(character): # TODO add new language Thieves' Cant
+    pass 
+
+def sorcerer_language(character): # TODO add new language primordial
+    pass 
+
+def warlock_add_spells(character): # TODO add patron spells Burning Hands & Command
+    pass 
+
 ClassList = {
     'Artificer': CharClass('Artificer',
                            8,
@@ -60,7 +86,6 @@ ClassList = {
                            [
                                Features("Rage",
                                         'In battle, you fight with primal ferocity. On your turn, you can enter a rage as a bonus action.\n'
-
                                         'While raging, you gain the following benefits if you aren\'t wearing heavy armor:\n'
                                         'You have advantage on Strength checks and Strength saving throws.'
                                         'When you make a melee weapon attack using Strength, you gain a bonus to the damage roll that increases as you gain levels as a barbarian, as shown in the Rage Damage column of the Barbarian table.'
@@ -72,7 +97,7 @@ ClassList = {
                                 Features("Unarmored Defense",
                                          "While you are not wearing any armor, your armor class equals 10 + your Dexterity modifier + your Constitution modifier. You can use a shield and still gain this benefit.",
                                          "class",
-                                         [] # TODO - AC = 10 + DEX + CON
+                                         [barbarian_update_AC]
                                          )
                            ]
     ),
@@ -129,7 +154,7 @@ ClassList = {
                                Features("Druidic",
                                         'You know Druidic, the secret language of druids. You can speak the language and use it to leave hidden messages. You and others who know this language automatically spot such a message. Others spot the message\'s presence with a successful DC 15 Wisdom (Perception) check but can\'t decipher it without magic.',
                                         "class",
-                                        []      # TODO - add Druidic Language
+                                        [druid_language]      # TODO - add Druidic Language
                                         )
                            ]
     ),
@@ -177,12 +202,12 @@ ClassList = {
                                         'When you use the Attack action with an unarmed strike or a monk weapon on your turn, you can make one unarmed strike as a bonus action. For example, if you take the Attack action and attack with a quarterstaff, you can also make an unarmed strike as a bonus action, assuming you haven\'t already taken a bonus action this turn.'
                                         'Certain monasteries use specialized forms of the monk weapons. For example, you might use a club that is two lengths of wood connected by a short chain (called a nunchaku) or a sickle with a shorter, straighter blade (called a kama). Whatever name you use for a monk weapon, you can use the game statistics provided for the weapon on the Weapons page.',
                                         "class",
-                                        [] # TODO - add unarmed attack to weapons
+                                        [monk_add_weapon] # TODO - add unarmed attack to weapons
                                ),
                                Features("Unarmored Defense",
                                         "Beginning at 1st level, while you are wearing no armor and not wielding a shield, your AC equals 10 + your Dexterity modifier + your Wisdom modifier.",
                                         "class",
-                                        [] # TODO - AC = 10 + WIS + DEX
+                                        [monk_update_AC] # TODO - AC = 10 + WIS + DEX
                                         ),
                            ]
     ),
@@ -275,7 +300,7 @@ ClassList = {
                                          'During your rogue training you learned thieves\' cant, a secret mix of dialect, jargon, and code that allows you to hide messages in seemingly normal conversation. Only another creature that knows thieves\' cant understands such messages. It takes four times longer to convey such a message than it does to speak the same idea plainly.'
                                          'In addition, you understand a set of secret signs and symbols used to convey short, simple messages, such as whether an area is dangerous or the territory of a thieves\' guild, whether loot is nearby, or whether the people in an area are easy marks or will provide a safe house for thieves on the run.',
                                          "class",
-                                         []     # TODO - add Thieves' Cant to languages
+                                         [rogue_language]     # TODO - add Thieves' Cant to languages
                                 )
                            ]
     ),
@@ -296,7 +321,7 @@ ClassList = {
                                Features("Sorcerous Origin: Storm Sorcery: Wind Speaker",
                                         "The arcane magic you command is infused with elemental air. You can speak, read, and write Primordial. Knowing this language allows you to understand and be understood by those who speak its dialects: Aquan, Auran, Ignan, and Terran.",
                                         "class",
-                                        [] # TODO - add primordial to languages
+                                        [sorcerer_language] # TODO - add primordial to languages
                                         ),
                                 Features("Sorcerous Origin: Storm Sorcery: Tempestuous Magic",
                                          'Starting at 1st level, you can use a bonus action on your turn to cause whirling gusts of elemental air to briefly surround you, immediately before or after you cast a spell of 1st level or higher. Doing so allows you to fly up to 10 feet without provoking opportunity attacks.',
@@ -319,7 +344,9 @@ ClassList = {
                                Features("Patron: The Fiend: Dark One's Blessing",
                                         'Starting at 1st level, when you reduce a hostile creature to 0 hit points, you gain temporary hit points equal to your Charisma modifier + your warlock level (minimum of 1).'
                                         'class'),
-                                # Features(None,None,None,[]) # TODO - add spells to spell list
+                                Features("Patron: Expanded Spell List","Burning Hands and Command are added to your spell list.",
+                                         "class",
+                                         [warlock_add_spells]) 
                                     
                            ]
     ),

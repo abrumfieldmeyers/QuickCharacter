@@ -150,17 +150,17 @@ class Character:
             print(p,",")
         print("-----------------")
 
+    def add_feature(self,feature_list,new_feature):
+        feature_list.append(new_feature)
+        for mod in new_feature.mods:
+            mod(self)
 
     def set_features(self):
-        features = []
-
-        features.append(self.char_back.feature)
+        feature_list = []
+        self.add_feature(feature_list,self.char_back.feature)
         for f in self.char_class.features:
-            features.append(f)
+            self.add_feature(feature_list,f)
         for f in self.char_species.features:
-            features.append(f)
+            self.add_feature(feature_list,f)
 
-        # for f in features:
-        #     print(f)
-
-        return features
+        return feature_list
