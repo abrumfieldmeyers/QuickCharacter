@@ -39,7 +39,8 @@ class Character:
         self.skill_list = SkillList(self.stats,self.skill_prof)
         self.armor_class = 10
 
-        self.set_features()
+        self.features = self.set_features()
+        
     
     def __repr__(self) -> str:
         return (f"Name: {self.player_name}\nChar: {self.char_name}\nClass: {self.char_class.name}\nSpecies: {self.char_species.name}\nBack: {self.char_back.name}\nSTATS: \n{self.stats}")
@@ -151,4 +152,15 @@ class Character:
 
 
     def set_features(self):
-        pass
+        features = []
+
+        features.append(self.char_back.feature)
+        for f in self.char_class.features:
+            features.append(f)
+        for f in self.char_species.features:
+            features.append(f)
+
+        # for f in features:
+        #     print(f)
+
+        return features

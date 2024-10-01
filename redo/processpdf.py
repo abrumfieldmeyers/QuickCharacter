@@ -60,9 +60,8 @@ def process(character):
                         "HDTotal" : "1d"+str(character.char_class.hit_die),
                         "HD" : "1",
 
-                        "Passive": 10 + int(character.skill_list.Perception.value)
-
-
+                        "Passive": 10 + int(character.skill_list.Perception.value),
+  
                         }
                     
     )
@@ -99,6 +98,13 @@ def process(character):
     # Process checkboxes for stat saves
     for num in character.save_checks:
         writer.update_page_form_field_values(writer.pages[0], {f"Check Box {num}":"/Yes"})
+
+    # Character features
+    featToPrint = ""
+    for f in character.features:
+        featToPrint += f"- {f.name}: {f.text}\n"
+    writer.update_page_form_field_values(writer.pages[0], {f"Features and Traits":featToPrint})
+
 
     # # Process equipment
     # equipmentlist = ""

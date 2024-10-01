@@ -14,7 +14,6 @@ class CharSpecies:
         self.speed = speed
         self.languages = languages
 
-
 SpeciesList = {
     'xx': CharSpecies(
         'xx',
@@ -189,7 +188,4 @@ SpeciesList = {
                      []) # TODO - add Thaumaturgy cantrip to spells
         ]
     ),
-    
-
-
-},
+}
