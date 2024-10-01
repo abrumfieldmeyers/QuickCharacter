@@ -7,11 +7,26 @@ I am developing this tool to allow first time players to create a fully function
  
 TODO: 
 - Exporting character aspects into pdf:
-    - Fix selected skills
-    - Character features
+- Character features
+    -   Process in ClassDef
+    -   How to update Modified stats (AC, proficiency, etc.) Mod class?
+    
+
     - Weapons
         - Need to account for negative mods?
     - Spells
+
+
+- Reach goals:
+    - Select fighter's fighting style
+    - Select Cleric's divine domain
+    - Select Rogue skills for expertise
+    - Select Ranger favored enemy, terrain
+    - Select Sorcerous Origins (plus dragon color selection for Draconic Bloodline)
+    - Select Warlock Patron
+    - Select all subspecies (Dragonborn color, etc)
+
+
 - User Interface;
     - Clean up player & character name fields
     - Realign window for more symettrical view.   

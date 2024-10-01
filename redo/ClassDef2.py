@@ -5,6 +5,7 @@ from charBacks import CharBack,BackList
 from find_checks import fill_skill_check,fill_save_check
 from Stats import Stats
 from SkillList import SkillList
+from Feature import Features
 
 class Character:
 
@@ -37,6 +38,8 @@ class Character:
         self.set_proficiencies()
         self.skill_list = SkillList(self.stats,self.skill_prof)
         self.armor_class = 10
+
+        self.set_features()
     
     def __repr__(self) -> str:
         return (f"Name: {self.player_name}\nChar: {self.char_name}\nClass: {self.char_class.name}\nSpecies: {self.char_species.name}\nBack: {self.char_back.name}\nSTATS: \n{self.stats}")
@@ -145,3 +148,7 @@ class Character:
         for p in self.skill_prof:
             print(p,",")
         print("-----------------")
+
+
+    def set_features(self):
+        pass
